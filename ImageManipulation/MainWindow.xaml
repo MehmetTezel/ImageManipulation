@@ -1,0 +1,45 @@
+﻿<Window x:Class="ImageManipulation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImageManipulation"
+         xmlns:local1="clr-namespace:ImageManipulation.TabsNS.ImageOperationsNS"
+        xmlns:local2="clr-namespace:ImageManipulation.TabsNS.ImagePropertyNS"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525" SizeToContent="WidthAndHeight" >
+    <DockPanel >
+        <Button Name="buttonLoadImage" DockPanel.Dock="Top" Margin="5" Click="buttonLoadImage_Click" Content="Load Image File"/>
+
+        <Grid  >
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  Width="*" MaxWidth="800" ></ColumnDefinition>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition ></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer  Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Name="imageScrolWiever" Margin="10" HorizontalScrollBarVisibility="Visible" Background="Black" Style="{DynamicResource SimpleScrollViewer}">
+                    <Image Name="image1" MouseWheel="image1_MouseWheel"  ></Image>
+                </ScrollViewer>
+            <GridSplitter  Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" BorderBrush="Black" Background="#FF370B0C"   />
+            <TabControl Name="tabConrtol1" Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" Background="{x:Null}" >
+                <TabItem Header="Manipulations" >
+                    <local1:AddMethodsUC  TabIndex="0" Background="#FFB6ADAD"  />
+                </TabItem>
+
+            </TabControl>
+        </Grid>
+
+
+        <!--<WrapPanel Name="wrapPanel">
+            <ScrollViewer Name="scrolWiever" Margin="10">
+                <Image Name="image1" MouseWheel="image1_MouseWheel"   ></Image>
+            </ScrollViewer>
+        </WrapPanel>-->
+    </DockPanel>
+
+</Window>

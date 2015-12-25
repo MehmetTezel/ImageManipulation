@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="ImageManipulation.TabsNS.ImagePropertyNS.ImagePropertiesUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ImageManipulation.TabsNS.ImagePropertyNS"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Background="{DynamicResource UserConrolBackground}">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="120"/>
+        </Style>
+
+    </UserControl.Resources>
+    <StackPanel Background="{DynamicResource UserConrolBackground}">
+        <StackPanel Orientation="Horizontal">
+            <Label Grid.Row="0" Grid.Column="0" Content="File Name :"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Height="22"  Text="{Binding FullFileName}" ToolTip="{Binding FullFileName}"></TextBox>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal">
+            <Label Grid.Row="1" Grid.Column="0" Content="Main Window Width  :"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Height="22" IsEnabled="False" Text="{Binding MainWindowWidth}"></TextBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Grid.Row="2" Grid.Column="0" Content="Main Window Height :"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Height="22" IsEnabled="False" Text="{Binding MainWindowHeight}"></TextBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Grid.Row="4" Grid.Column="0" Content="Device Independent Height :"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Height="22" IsEnabled="False" Text="{Binding DeviceIndependentHeight}"></TextBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Grid.Row="5" Grid.Column="0" Content="Bits Per Pixel :"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Height="22" IsEnabled="False" Text="{Binding BitsPerPixel}"></TextBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Grid.Row="6" Grid.Column="0" Content="Pixel Height :"/>
+            <TextBox Grid.Row="6" Grid.Column="1" Height="22" IsEnabled="False" Text="{Binding PixelHeight}"></TextBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Grid.Row="7" Grid.Column="0" Content="Pixel Width :"/>
+            <TextBox Grid.Row="7" Grid.Column="1" Height="22" IsEnabled="False" Text="{Binding PixelWidth}"></TextBox>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal">
+            <Label Grid.Row="8" Grid.Column="0" Content="DpiX :"/>
+            <TextBox Grid.Row="8" Grid.Column="1" Height="22" IsEnabled="False" Text="{Binding DpiX}"></TextBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Grid.Row="9" Grid.Column="0" Content="DpiY :"/>
+            <TextBox Grid.Row="9" Grid.Column="1" Height="22" IsEnabled="False" Text="{Binding DpiY}"></TextBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Grid.Row="10" Grid.Column="0" Content="Opacity :"/>
+            <TextBox Grid.Row="10" Grid.Column="1" Height="22" IsEnabled="False" Text="{Binding Opacity}"></TextBox>
+        </StackPanel>
+
+
+    </StackPanel>
+</UserControl>
