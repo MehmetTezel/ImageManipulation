@@ -339,14 +339,14 @@ namespace ImageManipulation.TabsNS.ImageOperationsNS
             weakSlider.IsEnabled = true;
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            colorSwitchingGroupBox.IsEnabled = true;
-        }
+        //private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    colorSwitchingGroupBox.IsEnabled = true;
+        //}
 
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            colorSwitchingGroupBox.IsEnabled = false;
-        }
+        //private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        //{
+        //    colorSwitchingGroupBox.IsEnabled = false;
+        //}
     }
 }

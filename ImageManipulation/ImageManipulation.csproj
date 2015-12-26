@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CoreNS\Conrols\GroupSlider.cs" />
     <Compile Include="CoreNS\Conrols\MainControlsData.cs" />
     <Compile Include="CoreNS\CurrentState.cs" />
     <Compile Include="CoreNS\Conrols\ControlDefaults.cs" />

@@ -5,4 +5,5 @@
         <ResourceDictionary Source="/ImageManipulation;component/Simple Styles.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
+
 </ResourceDictionary>
