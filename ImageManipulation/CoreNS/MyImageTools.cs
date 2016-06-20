@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections;
+using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 namespace ImageManipulation.CoreNS
 {
     public static class MyImageTools
     {
-        public static unsafe void CopyBitmapToPixelsBuffer()
+        public static unsafe void ConstructPixelBufferFromFile()
         {
             BitmapSource source = CurrentState.bitmapImage as BitmapSource;
-            PixelColor[,] pixels = CurrentState.pixels;
+            PixelColor[,] pixels = CurrentState.originalPixels;
 
             fixed (PixelColor* buffer = &pixels[0, 0])
               source.CopyPixels(
@@ -18,6 +20,18 @@ namespace ImageManipulation.CoreNS
                 (IntPtr)(buffer),
                 pixels.GetLength(0) * pixels.GetLength(1) * sizeof(PixelColor),
                 source.PixelWidth * 4);
+            CurrentState.pixels = new PixelColor[CurrentState.originalPixels.GetLength(0), CurrentState.originalPixels.GetLength(1)];
+            Array.Copy(CurrentState.originalPixels, CurrentState.pixels, pixels.Length);
+        }
+
+        public static unsafe void SetCurrentState(string fileName, Image image)
+        {
+            Uri uri = new Uri(fileName, UriKind.RelativeOrAbsolute);
+            BitmapImage bitmapImage = new BitmapImage(uri);
+            CurrentState.originalPixels = new PixelColor[bitmapImage.PixelWidth, bitmapImage.PixelHeight];
+            CurrentState.fullfileName = fileName;
+            CurrentState.bitmapImage = bitmapImage;
+            CurrentState.image = image;
         }
 
         public static unsafe WriteableBitmap WritePixelsToBitmap()
@@ -36,17 +50,29 @@ namespace ImageManipulation.CoreNS
             return writableBitmap;
         }
 
-
-        public static void ChangePixelColor(PixelColor pixelColor)
+        public static void SaveImage(string filePath)
         {
-            PixelColor[,] pixels = CurrentState.pixels;
+            var encoder = new PngBitmapEncoder();
+           
+            encoder.Frames.Add(BitmapFrame.Create((BitmapSource)CurrentState.image.Source));
+            using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                encoder.Save(stream);
+        }
 
+
+        public static void ChangePixelColor(PixelParameter pixelParam)
+        {
+            PixelColor[,] pixels = new PixelColor[CurrentState.originalPixels.GetLength(0), CurrentState.originalPixels.GetLength(1)];
+            Array.Copy(CurrentState.originalPixels,pixels, pixels.Length);
             for (int i = 0; i < pixels.GetLength(0); i++)
                 for (int j = 0; j < pixels.GetLength(1); j++)
                 {
-                    pixels[i, j].ChangeColors(pixelColor);
+                    pixels[i, j].ChangeColors(pixelParam);
+                    pixels[i, j].SwitchColors(pixelParam);
                 }
+            CurrentState.pixels = pixels;
             CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
+            
         }
 
 
@@ -154,6 +180,38 @@ namespace ImageManipulation.CoreNS
                     pixels[i, j].ReverseColor();
                 }
         }
+
+        public static void Square()
+        {
+            PixelColor[,] pixels = CurrentState.pixels;
+            for (int i = 0; i < pixels.GetLength(0); i++)
+                for (int j = 0; j < pixels.GetLength(1); j++)
+                {
+                    pixels[i, j].Square();
+                }
+        }
+
+        public static void SquareRoot()
+        {
+            PixelColor[,] pixels = CurrentState.pixels;
+            for (int i = 0; i < pixels.GetLength(0); i++)
+                for (int j = 0; j < pixels.GetLength(1); j++)
+                {
+                    pixels[i, j].SquareRoot();
+                }
+        }
+
+        public static void Logaritma()
+        {
+            PixelColor[,] pixels = CurrentState.pixels;
+            for (int i = 0; i < pixels.GetLength(0); i++)
+                for (int j = 0; j < pixels.GetLength(1); j++)
+                {
+                    pixels[i, j].Logaritma();
+                }
+        }
+
+
         public static void RemoveWeakColors()
         {
             PixelColor[,] pixels = CurrentState.pixels;

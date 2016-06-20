@@ -15,7 +15,7 @@ namespace ImageManipulation.CoreNS
         public static string fullfileName  ;
         public static MainWindow mainWindow;
         public static PixelColor[,] pixels;
-
+        public static PixelColor[,] originalPixels;
         public static void SetFeilds(Image img, BitmapImage bmpImg, string fileName,MainWindow mainWnd )
         {
             image = img;
@@ -23,5 +23,7 @@ namespace ImageManipulation.CoreNS
             fullfileName = fileName;
             mainWindow = mainWnd;
         }
+
+      
     }
 }

@@ -1,7 +1,23 @@
 ﻿using System;
-
+using ImageManipulation.CoreNS.Controls;
 namespace ImageManipulation.CoreNS
 {
+
+    public class PixelParameter
+    {
+        public double Blue;
+        public double Green;
+        public double Red;
+
+
+        public bool EnableSwitchColors = false;
+        public bool SwitchGreenAndBlue = false;
+        public bool SwitchRedAndBlue = false;
+        public bool SwitchGreenAndRed = false;
+
+
+    }
+
     public struct PixelColor
     {
         public byte Blue;
@@ -11,19 +27,178 @@ namespace ImageManipulation.CoreNS
 
 
 
-        public void ChangeColors(PixelColor pixelColor, PixelColorSMW pixelColorSMW)
+
+
+        public void ChangeColors(PixelParameter pixelParam)
         {
-            Blue = pixelColor.Blue;
-            Green = pixelColor.Green;
-            Red = pixelColor.Red;
+
+            Blue = GetColorValue((byte)pixelParam.Blue, Blue);
+            Green = GetColorValue((byte)pixelParam.Green, Green);
+            Red = GetColorValue((byte)pixelParam.Red, Red);
+
         }
 
-        public void ChangeColors(PixelColor pixelColor)
+
+        private byte GetColorValue(byte sliderValue, byte colorByte)
         {
-            Blue = (byte)(Blue*pixelColor.Blue);
-            Green = pixelColor.Green;
-            Red = pixelColor.Red;
+            double percent = 1.0;
+            if (sliderValue > Slider.SliderDefaults.InitialValue)
+            {
+                percent += (sliderValue - Slider.SliderDefaults.InitialValue) / Slider.SliderDefaults.powerValue;
+
+            }
+            else
+            {
+                percent += (Slider.SliderDefaults.InitialValue - sliderValue) / Slider.SliderDefaults.powerValue;
+            }
+            if (sliderValue > Slider.SliderDefaults.InitialValue)
+                return (byte)(colorByte * percent > 255 ? 255 : colorByte * percent);
+            else
+                return (byte)(colorByte / percent);
+
         }
+
+        //public void ChangeColorsSMW(PixelParameter pixelParameter)
+        //{
+
+        //    double temp;
+        //    if (pixelParameter.IsPercentage)
+        //    {
+        //        if (pixelParameter.IsBlueEnabled)
+        //        {
+        //            temp = NewMethod(pixelParameter);
+        //        }
+        //        if (pixelParameter.IsGreenEnabled)
+        //        {
+        //            if (Green > Blue && Green > Red) // if strong
+        //            {
+        //                temp = Green * pixelParameter.Blue / 255;
+        //                if (temp > 255)
+        //                    Green = 255;
+        //                else
+        //                    Green = (byte)temp;
+        //            }
+        //            else if (Green < Blue && Green < Red) // if weak
+        //            {
+        //                temp = Green * pixelParameter.Red / 255;
+        //                if (temp > 255)
+        //                    Green = 255;
+        //                else
+        //                    Green= (byte)temp;
+        //            }
+        //            else  // if middle
+        //            {
+        //                temp = Green * pixelParameter.Green / 255;
+        //                if (temp > 255)
+        //                    Green = 255;
+        //                else
+        //                    Green = (byte)temp;
+        //            }
+        //        }
+        //        if (pixelParameter.IsRedEnabled)
+        //        {
+        //            if (Red > Green && Red > Blue) // if strong
+        //            {
+        //                temp = Red * pixelParameter.Blue / 255;
+        //                if (temp > 255)
+        //                    Red = 255;
+        //                else
+        //                    Red = (byte)temp;
+        //            }
+        //            else if (Red < Green && Red < Blue) // if weak
+        //            {
+        //                temp = Red * pixelParameter.Red / 255;
+        //                if (temp > 255)
+        //                    Red = 255;
+        //                else
+        //                    Red = (byte)temp;
+        //            }
+        //            else  // if middle
+        //            {
+        //                temp = Red * pixelParameter.Green / 255;
+        //                if (temp > 255)
+        //                    Red = 255;
+        //                else
+        //                    Red = (byte)temp;
+        //            }
+        //        }
+
+        //    }
+        //    else
+        //    {
+        //        if (pixelParameter.IsBlueEnabled)
+        //            Blue = (byte)(pixelParameter.Blue / 2);
+        //        if (pixelParameter.IsGreenEnabled)
+        //            Green = (byte)(pixelParameter.Green / 2);
+        //        if (pixelParameter.IsRedEnabled)
+        //            Red = (byte)(pixelParameter.Red / 2);
+        //    }
+
+        //}
+
+        private double NewMethod(PixelParameter pixelParameter)
+        {
+            double temp;
+            if (Blue > Green && Blue > Red) // if strong
+            {
+                temp = Blue * pixelParameter.Blue / 255;
+                if (temp > 255)
+                    Blue = 255;
+                else
+                    Blue = (byte)temp;
+            }
+            else if (Blue < Green && Blue < Red) // if weak
+            {
+                temp = Blue * pixelParameter.Red / 255;
+                if (temp > 255)
+                    Blue = 255;
+                else
+                    Blue = (byte)temp;
+            }
+            else  // if middle
+            {
+                temp = Blue * pixelParameter.Green / 255;
+                if (temp > 255)
+                    Blue = 255;
+                else
+                    Blue = (byte)temp;
+            }
+
+            return temp;
+        }
+
+        public void SwitchColors(PixelParameter pixelParameter)
+        {
+
+
+            byte temp = Blue;
+            if (pixelParameter.SwitchGreenAndBlue)
+            {
+                temp = Blue;
+                Blue = Green;
+                Green = temp;
+                return;
+            }
+
+            if (pixelParameter.SwitchRedAndBlue)
+            {
+                temp = Blue;
+                Blue = Red;
+                Red = temp;
+                return;
+            }
+
+            if (pixelParameter.SwitchGreenAndRed)
+            {
+                temp = Green;
+                Green = Red;
+                Red = temp;
+                return;
+            }
+
+
+        }
+
 
 
         public void ToOneBit()
@@ -176,10 +351,41 @@ namespace ImageManipulation.CoreNS
         }
         public void ReverseColor()
         {
-            Blue = (byte)Math.Abs(Blue - byte.MaxValue);
-            Green = (byte)Math.Abs(Green - byte.MaxValue);
-            Red = (byte)Math.Abs(Red - byte.MaxValue);
+            Blue = (byte)(byte.MaxValue - 1 - Blue);
+            Green = (byte)(byte.MaxValue - 1 - Green);
+            Red = (byte)(byte.MaxValue - 1 - Red);
         }
+
+        public void Square()
+        {
+            Blue = (byte)(Blue * Blue > byte.MaxValue ? byte.MaxValue : Blue * Blue);
+            Green = (byte)(Green * Green > byte.MaxValue ? byte.MaxValue : Green * Green);
+            Red = (byte)(Red * Red > byte.MaxValue ? byte.MaxValue : Red * Red);
+
+        }
+
+        public void SquareRoot()
+        {
+            Blue = (byte)Math.Sqrt(Blue + 1);
+            Green = (byte)Math.Sqrt(Green + 1);
+            Red = (byte)Math.Sqrt(Red + 1);
+
+        }
+
+        public void Logaritma()
+        {
+            Blue = (byte)(Math.Log(Blue + 1));
+            Green = (byte)(Math.Log(Green + 1));
+            Red = (byte)(Math.Log(Red + 1));
+        }
+
+        public void InverseLogaritma()
+        {
+            Blue = (byte)(Math.Log(Blue + 1));
+            Green = (byte)(Math.Log(Green + 1));
+            Red = (byte)(Math.Log(Red + 1));
+        }
+
 
         public void AddBrightness(byte brightness)
         {

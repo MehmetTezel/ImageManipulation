@@ -964,6 +964,8 @@
 	Similiar to ScrollBar this template uses Track to layout the draggable Thumb which has an up and down repeat button
 	It uses Simple SliderThumb and SimpleScrollRepeatButtonStyle for the page up and down repeat buttons -->
     <Style x:Key="SimpleSlider" TargetType="{x:Type Slider}">
+        <Setter Property="Margin" Value="2" />
+        <Setter Property="Width" Value="240"/>
         <Setter Property="Background" Value="{DynamicResource LightBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}"/>
         <Setter Property="Template">

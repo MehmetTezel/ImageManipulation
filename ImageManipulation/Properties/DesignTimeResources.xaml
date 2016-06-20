@@ -3,6 +3,7 @@
                     xmlns:local="clr-namespace:ImageManipulation.Properties">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/ImageManipulation;component/Simple Styles.xaml"/>
+        <ResourceDictionary Source="/ImageManipulation;component/Dictionary2.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 

@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ImageManipulation.TabsNS.ImageOperationsNS"
            
-             xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="ImageManipulation.TabsNS.ImageOperationsNS.AddMethodsUC"
+             xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Name="slider" x:Class="ImageManipulation.TabsNS.ImageOperationsNS.AddMethodsUC"
            
-             mc:Ignorable="d" d:DesignWidth="300" Height="494.2"  >
+             mc:Ignorable="d" d:DesignWidth="320" Height="494.2"  >
     <UserControl.Resources>
         <Style TargetType="{x:Type Label}">
             <Setter Property="Height" Value="30"/>
@@ -17,215 +17,67 @@
 
     </UserControl.Resources>
 
-    <ScrollViewer x:Name="scrolWiever" Margin="10" HorizontalScrollBarVisibility="Visible" Background="{DynamicResource UserConrolBackground}" Style="{DynamicResource SimpleScrollViewer}" >
+    <ScrollViewer x:Name="scrolWiever"  HorizontalScrollBarVisibility="Visible" Background="{DynamicResource UserConrolBackground}" Style="{DynamicResource SimpleScrollViewer}" >
         <StackPanel Orientation="Vertical">
 
             <StackPanel Orientation="Horizontal" Margin="5">
                 <StackPanel Orientation="Vertical">
-                    <CheckBox Name="colorCheckBox"  Content="Enable" IsChecked="True"/>
-                    <GroupBox Header="Color Enhancing Supressing" Padding="3" Margin="5" IsEnabled="{Binding ElementName=colorCheckBox, Path=IsChecked}" >
-                    <StackPanel Orientation="Vertical">
-                        <Grid >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="107" />
-                                <ColumnDefinition Width="20"/>
-                                <ColumnDefinition Width="90"/>
-                            </Grid.ColumnDefinitions>
-                            <RadioButton Grid.Column="0" GroupName="RGB" Content="As Percentage" Style="{DynamicResource SimpleRadioButton}" IsChecked="True"/>
-                            <RadioButton Grid.Column="2" GroupName="RGB" Content="As Color"  HorizontalAlignment="Right" />
-                            <ed:BlockArrow  Grid.Column="1" Height="8" Margin="2" Grid.Row="0"  Fill="Beige"  Orientation="Down" Stroke="Black" VerticalAlignment="Bottom"/>
-                        </Grid>
-                        <StackPanel Orientation="Vertical" >
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox Margin="0,0,5,0" Name="checkBoxBlueSlider" Style="{DynamicResource SimpleCheckBox}" Unchecked="checkBoxBlueSlider_Unchecked" Checked="checkBoxBlueSlider_Checked"/>
-                                <Slider  x:Name="blueSlider"   Background="{DynamicResource BlueSliderBackground}" Style="{DynamicResource SimpleSlider}"  PreviewMouseLeftButtonUp="blueSlider_PreviewMouseLeftButtonUp"   />
-                            </StackPanel >
-
-
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox Margin="0,0,5,0" Name="checkBoxGreenSlider" Style="{DynamicResource SimpleCheckBox}" Unchecked="checkBoxGreenSlider_Unchecked" Checked="checkBoxGreenSlider_Checked"/>
-                                <Slider  x:Name="greenSlider"  Background="{DynamicResource GreenSliderBackground}" Style="{DynamicResource SimpleSlider}" PreviewMouseLeftButtonUp="greenSlider_PreviewMouseLeftButtonUp"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox Margin="0,0,5,0" Name="checkBoxRedSlider" Style="{DynamicResource SimpleCheckBox}" Unchecked="checkBoxRedSlider_Unchecked"  Checked="checkBoxRedSlider_Checked"/>
-                                <Slider  x:Name="redSlider"    Background="{DynamicResource RedSliderBackground}" Style="{DynamicResource SimpleSlider}" PreviewMouseLeftButtonUp="redSlider_PreviewMouseLeftButtonUp"/>
-                            </StackPanel>
-                            <Button x:Name="resetSliders" Content="Reset Sliders" Height="17" Margin="0,5,0,0" Width="{DynamicResource StyleGroupButtonWidth}" Style="{DynamicResource SimpleButton}" Click="resetSliders_Click"/>
-                        </StackPanel>
-                    </StackPanel>
-                </GroupBox>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <CheckBox Name="ColorSMWCheckBox" Content="Enable"  IsChecked="False"  />
-                    <GroupBox Header="Strong Weak Color Enhance Supres" Padding="3" Margin="5" IsEnabled="{Binding ElementName=ColorSMWCheckBox, Path=IsChecked}">
-                    <StackPanel Orientation="Vertical">
-                        <Grid >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="107" />
-                                <ColumnDefinition Width="20"/>
-                                <ColumnDefinition Width="90"/>
-                            </Grid.ColumnDefinitions>
-
-                            <RadioButton Grid.Column="0" GroupName="SMW" Content="As Percentage" Style="{DynamicResource SimpleRadioButton}" IsChecked="True"/>
-                            <RadioButton Grid.Column="2" GroupName="SMW" Content="As Color" HorizontalAlignment="Right" />
-                            <ed:BlockArrow  Grid.Column="1" Height="8" Margin="2" Grid.Row="0"  Fill="Beige"  Orientation="Down" Stroke="Black" VerticalAlignment="Bottom"/>
-
-                        </Grid>
+                    
+                    <GroupBox x:Name="ColorGroup" Header="Color Enhancion"  Margin="3" >
                         <StackPanel Orientation="Vertical">
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox  Margin="0,0,5,0" Name="checkBoxStrongSlider" Style="{DynamicResource SimpleCheckBox}" Unchecked="checkBoxStrongSlider_Unchecked" Checked="checkBoxStrongSlider_Checked"/>
-                                <Slider  x:Name="strongSlider"  Background="{DynamicResource WeakStrongSliderBackGround}" Style="{DynamicResource SimpleSlider}"/>
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120" />
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="120"/>
+                                </Grid.ColumnDefinitions>
+                                <ed:BlockArrow  Grid.Column="1" Height="8"  Grid.Row="0"  Fill="Beige"  Orientation="Down" Stroke="Black" VerticalAlignment="Bottom"/>
+                            </Grid>
+                            <StackPanel Orientation="Vertical" >
+                                    <Slider  x:Name="blueSlider"   Background="{DynamicResource BlueSliderBackground}" Style="{DynamicResource SimpleSlider}"  PreviewMouseLeftButtonUp="blueSlider_PreviewMouseLeftButtonUp"/>
+                                    <Slider  x:Name="greenSlider"   Background="{DynamicResource GreenSliderBackground}" Style="{DynamicResource SimpleSlider}" PreviewMouseLeftButtonUp="greenSlider_PreviewMouseLeftButtonUp" />
+                                    <Slider  x:Name="redSlider"    Background="{DynamicResource RedSliderBackground}" Style="{DynamicResource SimpleSlider}" PreviewMouseLeftButtonUp="redSlider_PreviewMouseLeftButtonUp" />
+                                <Button x:Name="reseoOriginalPicture" Content="Reset Original Picture" Height="17" Margin="5" Width="{DynamicResource StyleGroupButtonWidth}" Style="{DynamicResource SimpleButton}" Click="resetOriginalPicture_Click"/>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox  Margin="0,0,5,0" Name="checkBoxMiddleSlider" Style="{DynamicResource SimpleCheckBox}" Unchecked="checkBoxMiddleSlider_Unchecked" Checked="checkBoxMiddleSlider_Checked"/>
-                                <Slider  x:Name="middleSlider"  Background="{DynamicResource WeakStrongSliderBackGround}" Style="{DynamicResource SimpleSlider}"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox Margin="0,0,5,0" Name="checkBoxWeakSlider" Style="{DynamicResource SimpleCheckBox}" Unchecked="checkBoxWeakSlider_Unchecked" Checked="checkBoxWeakSlider_Checked"/>
-                                <Slider  x:Name="weakSlider"    Background="{DynamicResource WeakStrongSliderBackGround}" Style="{DynamicResource SimpleSlider}"/>
-                            </StackPanel>
-
-                            <Button x:Name="resetSlidersSW" Content="Reset Sliders" Height="17" Width="{DynamicResource StyleGroupButtonWidth}" Margin="0,5,0,0" Style="{DynamicResource SimpleButton}" Click="resetSlidersSW_Click"/>
                         </StackPanel>
-                    </StackPanel>
                     </GroupBox>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Margin="5">
-                <CheckBox Name="colorSwitchCheckBox"  Content="Enable"   />
-                <GroupBox Name="colorSwitchingGroupBox" Margin="4,0,4,4"  Header="Color Switching" IsEnabled="{Binding ElementName=colorSwitchCheckBox, Path=IsChecked}">
+                <GroupBox Name="colorSwitchingGroupBox" Margin="4,0,4,4"  Header="Color Switching" IsEnabled="{Binding ElementName=switchColorsCheckBox, Path=IsChecked}" >
                     <StackPanel Orientation= "Vertical" >
-                        <StackPanel Orientation= "Horizontal" >
-                            <GroupBox Header="Blue" Margin="4" Background="{DynamicResource GroupBoxBlueBackground}">
-                                <StackPanel Orientation="Vertical" >
-                                    <RadioButton  GroupName="SwitchBlue" Content="Use Itself" Style="{DynamicResource SimpleRadioButton}" IsChecked="True"/>
-                                    <RadioButton GroupName="SwitchBlue" Content="Use Green Instead" Style="{DynamicResource SimpleRadioButton}" />
-                                    <RadioButton  GroupName="SwitchBlue" Content="Use Red Instead" Style="{DynamicResource SimpleRadioButton}" />
-                                </StackPanel>
-                            </GroupBox>
-                            <GroupBox Header="Green" Margin="4" Background="{DynamicResource GroupBoxGreenBackground}">
-                                <StackPanel Orientation="Vertical" >
-                                    <RadioButton GroupName="SwitchGreen" Content="Use Itself" Style="{DynamicResource SimpleRadioButton}" IsChecked="True"/>
-                                    <RadioButton GroupName="SwitchGreen" Content="Use Blue Instead" Style="{DynamicResource SimpleRadioButton}" />
-                                    <RadioButton  GroupName="SwitchGreen" Content="Use Red Instead" Style="{DynamicResource SimpleRadioButton}" />
-                                </StackPanel>
-                            </GroupBox>
-                            <GroupBox Header="Red" Margin="4" Background="{DynamicResource GroupBoxRedBackground}">
 
-                                <StackPanel Orientation="Vertical" >
-                                    <RadioButton GroupName="SwitchRed" Content="Use Itself" Style="{DynamicResource SimpleRadioButton}" IsChecked="True"/>
-                                    <RadioButton GroupName="SwitchRed" Content="Use Blue Instead" Style="{DynamicResource SimpleRadioButton}" />
-                                    <RadioButton  GroupName="SwitchRed" Content="Use Green Instead" Style="{DynamicResource SimpleRadioButton}" />
-                                </StackPanel>
-                            </GroupBox>
+                        <StackPanel Orientation= "Vertical"  >
+                            <RadioButton  x:Name="NoSwitching" GroupName="SwitchColors" Content="No Switching" Style="{DynamicResource SimpleRadioButton}" IsChecked="True" />
+                            <RadioButton  x:Name="SwitchGreenAndBlue" GroupName="SwitchColors" Content="Switch blue with green" Style="{DynamicResource SimpleRadioButton}" Checked="SwitchGreenAndBlue_Checked" />
+                            <RadioButton  x:Name="SwitchRedAndBlue" GroupName="SwitchColors" Content="Switch red with blue" Style="{DynamicResource SimpleRadioButton}" Checked="SwitchRedAndBlue_Checked" />
+                            <RadioButton x:Name="switchRedAndGreen" GroupName="SwitchColors" Content="Switch red with green" Style="{DynamicResource SimpleRadioButton}" Checked="switchRedAndGreen_Checked" />
                         </StackPanel>
 
                     </StackPanel>
                 </GroupBox>
             </StackPanel>
-            <Expander Header="Color Modifier Methods" Margin="4" Style="{DynamicResource SimpleExpander}" Background="{DynamicResource ExpanderBackGroundFirstColor}">
 
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel  Orientation="Horizontal">
-                            <Label Content="Filter :"/>
-                            <ComboBox  x:Name="ComboBoxFilters" Width="120"  SelectionChanged="ComboBoxFilters_SelectionChanged"  >
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding FilterName}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <Label Content="Search :"/>
-                            <TextBox x:Name="TextBoxSearch" Width="120"  />
-                        </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="5">
+                <GroupBox Name="functionsGroupBox" Margin="4,0,4,4"  Header="Functions" IsEnabled="{Binding ElementName=switchColorsCheckBox, Path=IsChecked}" >
+                    <ListBox Grid.Column="0"     x:Name="ListBoxWithMethods"    d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" MouseDoubleClick="ListBoxWithMethods_MouseDoubleClick"  >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="13" Text="{Binding Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="85*"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <ListBox Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"   x:Name="ListBoxWithMethods"    d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" MouseDoubleClick="ListBoxWithMethods_MouseDoubleClick" SelectionChanged="ListBoxWithMethods_SelectionChanged" >
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock FontSize="13" Text="{Binding Name}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                            <Button Grid.Row="1" Grid.Column="1"  x:Name="ButtonUpdate" Content="Update to List" Margin="10" Click="ButtonUpdate_Click" Style="{DynamicResource SimpleButton}" />
-                            <Button  Grid.Row="2" Grid.Column="1"  x:Name="ButtonDelete"   Content="Delete from list" Margin="10" Click="ButtonDelete_Click" Style="{DynamicResource SimpleButton}" />
-
-                        </Grid>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Name"/>
-                            <TextBox x:Name="TextBoxName" Width="250"  Style="{DynamicResource TextBoxBaseStyle}"  Text="{Binding SelectedItem.Name, ElementName=ListBoxWithMethods}" />
-                            <CheckBox  x:Name="CheckBoxIsImportant" Content="Important"  IsChecked="{Binding SelectedItem.IsImportant, ElementName=ListBoxWithMethods}" />
-                        </StackPanel>
-                    </StackPanel>
-
-                    <StackPanel  Orientation="Horizontal" >
-                        <Label Content="Desc "/>
-                        <TextBox   x:Name="TextBoxDescription"  MinWidth="350" MinHeight="50"  Text="{Binding SelectedItem.Description, ElementName=ListBoxWithMethods}"  />
-                    </StackPanel>
-
-
-                </StackPanel>
-            </Expander>
-            <Expander  Header="Add Modification Method" Margin="4" Style="{DynamicResource SimpleExpander}" Background="{DynamicResource ExpanderBackGroundFirstColor}">
-
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Name" Margin="4"/>
-                        <TextBox x:Name="TextBoxAddName" Width="250"  Style="{DynamicResource TextBoxBaseStyle}"    />
-                        <CheckBox  x:Name="CheckBoxAddIsImportant" Height="20" Margin="3" Content="Important"   />
-                    </StackPanel>
-
-
-                    <StackPanel  Orientation="Horizontal" >
-                        <Label Content="Desc "/>
-                        <TextBox   x:Name="TextBoxAddDescription"  MinWidth="350" MinHeight="50"    />
-                    </StackPanel>
-                    <Button    x:Name="ButtonAdd" Content="Add to list" Margin="10" Click="ButtonAdd_Click"  Style="{DynamicResource SimpleButton}"/>
-                </StackPanel>
-            </Expander>
-            <Expander Header="Matrix Operations" Margin="4" Style="{DynamicResource SimpleExpander}" Background="{DynamicResource ExpanderBackGroundFirstColor}">
-                <StackPanel  Orientation="Horizontal">
-                    <Label Content="Matrix"/>
-                    <UniformGrid   x:Name="uniformGrid"   HorizontalAlignment="Left" VerticalAlignment="Top"  />
-                </StackPanel>
-            </Expander>
-            <Expander Header="List of Methods Used " Margin="4" Style="{DynamicResource SimpleExpander}" Background="{DynamicResource ExpanderBackGroundFirstColor}">
-                <ListBox   x:Name="ListBoxUsedMethodList" Height="100" >
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="14" Text="{Binding Name}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </Expander>
-            <StackPanel  Orientation="Horizontal"/>
-
-
+                </GroupBox>
+            </StackPanel>
 
         </StackPanel>
-
 
     </ScrollViewer>
 </UserControl>

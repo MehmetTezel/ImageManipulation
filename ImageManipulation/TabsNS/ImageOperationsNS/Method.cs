@@ -1,23 +1,18 @@
 ﻿using System;
 using ImageManipulation.CoreNS;
+using System.Collections.ObjectModel;
+
 namespace ImageManipulation.TabsNS.ImageOperationsNS
 {
     public class Method
     {
         private string name;
         private string description;
-        private bool isImportant;
-
         private string sliderValues;
         private short redSliderValue;
         private short greenSliderValue;
         private short blueSliderValue;
 
-        private short strongSliderValue;
-        private short middleSliderValue;
-        private short weakSliderValue;
-
-        private Guid id;
 
         public string Name
         {
@@ -43,11 +38,6 @@ namespace ImageManipulation.TabsNS.ImageOperationsNS
                 else
                     description = "";
             }
-        }
-        public bool IsImportant
-        {
-            get { return isImportant; }
-            set { isImportant = value; }
         }
 
         public string SliderValues
@@ -78,75 +68,58 @@ namespace ImageManipulation.TabsNS.ImageOperationsNS
             get { return blueSliderValue; }
             set { blueSliderValue = value; }
         }
+    }
 
-        public short StrongSliderValue
-        {
-            get { return strongSliderValue; }
-            set { strongSliderValue = value; }
-        }
-        public short MiddleSliderValue
-        {
-            get { return middleSliderValue; }
-            set { middleSliderValue = value; }
-        }
-        public short WeakSliderValue
-        {
-            get { return weakSliderValue; }
-            set { weakSliderValue = value; }
-        }
+    class MethodData
+    {
 
-        public Guid ID
+        public static ObservableCollection<Method> GetBuiltInMethods()
         {
-            get { return id; }
-            set { id = value; }
-        }
+            ObservableCollection<Method> methodList = new ObservableCollection<Method>();
 
-        public Method(string _name, string _description, DateTime _expirationDate, bool _isImportant)
-        {
-            id = Guid.NewGuid();
-            name = _name;
-            description = _description;
-            isImportant = _isImportant;
-        }
+            Method method = new Method();
+            method.Name = "ToOneBit";
+            method.Description = "";
+            methodList.Add(method);
 
-        public Method()
-        {
-            id = Guid.NewGuid();
-        }
+            method = new Method();
+            method.Name = "ToGray";
+            method.Description = "";
+            methodList.Add(method);
 
-        public  void ConvertSliderValues()
-        {
-          string[] numbers =  SliderValues.Split(' ');
-            BlueSliderValue = short.Parse(numbers[0]);
-            GreenSliderValue = short.Parse(numbers[1]);
-            RedSliderValue = short.Parse(numbers[2]); 
+            method = new Method();
+            method.Name = "ToGray2";
+            method.Description = "";
+            methodList.Add(method);
 
-            StrongSliderValue = short.Parse(numbers[3]);
-            MiddleSliderValue = short.Parse(numbers[4]);
-            WeakSliderValue   = short.Parse(numbers[5]);
-        }
+            method = new Method();
+            method.Name = "ReverseColor";
+            method.Description = "";
+            methodList.Add(method);
 
-        public void ConstructSliderValues()
-        {
-           // blueSliderValue = 
-            SliderValues = BlueSliderValue.ToString() + " " +
-                           GreenSliderValue.ToString() + " " +
-                           RedSliderValue.ToString() + " " +
+            method = new Method();
+            method.Name = "RemoveWeakColors";
+            method.Description = "";
+            methodList.Add(method);
 
-                           StrongSliderValue.ToString() + " " +
-                           MiddleSliderValue.ToString() + " " +
-                           WeakSliderValue.ToString();
+            method = new Method();
+            method.Name = "Square";
+            method.Description = "";
+            methodList.Add(method);
+
+            method = new Method();
+            method.Name = "SquareRoot";
+            method.Description = "";
+            methodList.Add(method);
+
+
+            method = new Method();
+            method.Name = "Logaritma";
+            method.Description = "";
+            methodList.Add(method);
+
+            return methodList;
         }
 
-        public void ToPixelColorAsPercentage(PixelColor pixelColor,PixelColorSMW pixelColorSMW)
-        {
-            pixelColor.Blue = (byte)((this.BlueSliderValue/513)*255);
-            pixelColor.Green = (byte)((this.GreenSliderValue / 513) * 255);
-            pixelColor.Red = (byte)((this.RedSliderValue / 513) * 255);
-
-            pixelColorSMW.Strong = (byte)((this.StrongSliderValue / 513) * 255);
-            pixelColorSMW.Middle = (byte)((this.MiddleSliderValue / 513) * 255);
-            pixelColorSMW.Weak= (byte)((this.WeakSliderValue / 513) * 255);
-        }
     }
 }

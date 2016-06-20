@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ImageManipulation.TabsNS.ImagePropertyNS"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"  
              d:DesignHeight="300" d:DesignWidth="300" Background="{DynamicResource UserConrolBackground}">
     <UserControl.Resources>
         <Style TargetType="{x:Type Label}">
@@ -20,13 +20,18 @@
         </StackPanel>
         
         <StackPanel Orientation="Horizontal">
-            <Label Grid.Row="1" Grid.Column="0" Content="Main Window Width  :"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Height="22" IsEnabled="False" Text="{Binding MainWindowWidth}"></TextBox>
+            <Label  Content="Main Window Width  :"/>
+            <TextBox  IsEnabled="False" Text="{Binding MainWindowWidth}"></TextBox>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
-            <Label Grid.Row="2" Grid.Column="0" Content="Main Window Height :"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Height="22" IsEnabled="False" Text="{Binding MainWindowHeight}"></TextBox>
+            <Label  Content="Main Window Height :"/>
+            <TextBox  IsEnabled="False" Text="{Binding MainWindowHeight}"></TextBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Grid.Row="4" Grid.Column="0" Content="Device Independent Width :"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Height="22" IsEnabled="False" Text="{Binding  DeviceIndependentWidth}"></TextBox>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">

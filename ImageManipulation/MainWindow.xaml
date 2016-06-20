@@ -6,40 +6,92 @@
         xmlns:local="clr-namespace:ImageManipulation"
          xmlns:local1="clr-namespace:ImageManipulation.TabsNS.ImageOperationsNS"
         xmlns:local2="clr-namespace:ImageManipulation.TabsNS.ImagePropertyNS"
-        mc:Ignorable="d"
+        xmlns:local3="clr-namespace:ImageManipulation.CoreNS.Controls"
+        mc:Ignorable="d" 
         Title="MainWindow" Height="350" Width="525" SizeToContent="WidthAndHeight" >
-    <DockPanel >
-        <Button Name="buttonLoadImage" DockPanel.Dock="Top" Margin="5" Click="buttonLoadImage_Click" Content="Load Image File"/>
 
-        <Grid  >
+    <DockPanel x:Name="myDockPanel" Background="{DynamicResource UserConrolBackground}">
+        
+        <StackPanel x:Name="MenuStackPanel" DockPanel.Dock="Top"  Orientation="Horizontal" Height="30"  >
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF252323" Offset="0"/>
+                    <GradientStop Color="#FFD7C6C6" Offset="0.997"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+           
+            <Button Name="buttonLoadImage"  Click="buttonLoadImage_Click" Margin="3" ToolTip="Open Image File" >
+                <StackPanel Orientation="Horizontal" >
+                    <Image Source="OpenFile.png"  />
+                    
+                </StackPanel>
+            </Button>
+
+            <Button Name="buttonSaveImage"  Click="buttonSaveImage_Click"  Margin="3" ToolTip="Save Image File As" >
+                <StackPanel Orientation="Horizontal" >
+                    <Image Source="SaveAsFile.png"  />
+                    
+                </StackPanel>
+            </Button>
+
+            <ToggleButton x:Name="MaximiseToggleButton"  Checked="MaximiseToggleButton_Checked" Unchecked="MaximiseToggleButton_Unchecked"  Margin="5" ToolTip="Maxisimise  Image-Reset Standart Window">
+                <StackPanel Orientation="Horizontal" >
+                    <Image Source="MaximiseImage.png"   />
+                </StackPanel>
+            </ToggleButton>
+
+            <Button Name="buttonNextImage"   Click="buttonNextImage_Click"  Margin="3" ToolTip="View Next Image" >
+                <StackPanel Orientation="Horizontal" >
+                    <Image Source="NextImage.png"  />
+                   
+                </StackPanel>
+            </Button>
+
+            <Button Name="buttonPreviousImage"   Click="buttonPreviousImage_Click"  Margin="3" ToolTip="View Previous Image" >
+                <StackPanel Orientation="Horizontal" >
+                    <Image Source="PreviousImage.png"   />
+                   
+                </StackPanel>
+            </Button>
+
+
+
+        </StackPanel>
+        
+        <Grid  x:Name="myGrid" DockPanel.Dock="Right" >
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition  Width="*" MaxWidth="800" ></ColumnDefinition>
+                <ColumnDefinition  Width="*"  />
                 <ColumnDefinition Width="5"/>
-                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition Width="320"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <ScrollViewer  Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Name="imageScrolWiever" Margin="10" HorizontalScrollBarVisibility="Visible" Background="Black" Style="{DynamicResource SimpleScrollViewer}">
-                    <Image Name="image1" MouseWheel="image1_MouseWheel"  ></Image>
-                </ScrollViewer>
-            <GridSplitter  Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" BorderBrush="Black" Background="#FF370B0C"   />
-            <TabControl Name="tabConrtol1" Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" Background="{x:Null}" >
-                <TabItem Header="Manipulations" >
-                    <local1:AddMethodsUC  TabIndex="0" Background="#FFB6ADAD"  />
-                </TabItem>
+            <DockPanel Grid.Row="0"  Grid.Column="0">
+            <local3:ZoomBorder x:Name="zoomBorder" DockPanel.Dock="Top" ClipToBounds="True" Background="#FFA89D98">
+                    
+             </local3:ZoomBorder>
+                <!--<Button Name="buttonNextImage2" DockPanel.Dock="Right"  Click="buttonNextImage_Click"  Margin="3" ToolTip="View Next Image" >
+                        <Image Source="NextImage.png"  />
+                </Button>
 
+                <Button Name="buttonPreviousImage2"  DockPanel.Dock="Left"  Click="buttonPreviousImage_Click"  Margin="3" ToolTip="View Previous Image" >
+                        <Image Source="PreviousImage.png"   />
+                </Button>-->
+
+
+            </DockPanel>
+            <GridSplitter  Grid.Column="1"  HorizontalAlignment="Stretch" BorderBrush="Black" Background="#FFF1F0E8"   />
+            <TabControl Name="tabConrtol1"  Grid.Column="2"  Background="{x:Null}" Margin="5,5,0,0" >
+                <TabItem  Header="Manipulations" >
+                    <local1:AddMethodsUC/>
+                </TabItem>
             </TabControl>
+
         </Grid>
 
-
-        <!--<WrapPanel Name="wrapPanel">
-            <ScrollViewer Name="scrolWiever" Margin="10">
-                <Image Name="image1" MouseWheel="image1_MouseWheel"   ></Image>
-            </ScrollViewer>
-        </WrapPanel>-->
     </DockPanel>
 
 </Window>
