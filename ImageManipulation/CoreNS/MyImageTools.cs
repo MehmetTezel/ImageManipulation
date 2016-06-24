@@ -22,7 +22,7 @@ namespace ImageManipulation.CoreNS
                 new Int32Rect(0, 0, source.PixelWidth, source.PixelHeight),
                 (IntPtr)(buffer),
                 pixels.GetLength(0) * pixels.GetLength(1) * sizeof(PixelColor),
-                source.PixelWidth * 4);
+                source.PixelWidth * sizeof(PixelColor));
             CurrentState.pixels = new PixelColor[CurrentState.originalPixels.GetLength(0), CurrentState.originalPixels.GetLength(1)];
             Array.Copy(CurrentState.originalPixels, CurrentState.pixels, pixels.Length);
         }
@@ -31,7 +31,7 @@ namespace ImageManipulation.CoreNS
         {
             Uri uri = new Uri(fileName, UriKind.RelativeOrAbsolute);
             BitmapImage bitmapImage = new BitmapImage(uri);
-            CurrentState.originalPixels = new PixelColor[bitmapImage.PixelWidth, bitmapImage.PixelHeight];
+            CurrentState.originalPixels = new PixelColor[bitmapImage.PixelHeight, bitmapImage.PixelWidth];
             CurrentState.fullfileName = fileName;
             CurrentState.bitmapImage = bitmapImage;
             CurrentState.image = image;
@@ -43,7 +43,10 @@ namespace ImageManipulation.CoreNS
             PixelColor[,] pixels = CurrentState.pixels;
 
             WriteableBitmap writableBitmap = new WriteableBitmap(source);
+            int rows = pixels.GetLength(0);
+            int cols   = pixels.GetLength(1);
             fixed (PixelColor* buffer = &pixels[0, 0])
+
             writableBitmap.WritePixels(
                 new Int32Rect(0, 0, source.PixelWidth, source.PixelHeight),
                 (IntPtr)(buffer),
@@ -144,35 +147,7 @@ namespace ImageManipulation.CoreNS
                 }
 
         }
-        public static void AddBrightness(byte brightness)
-        {
-            PixelColor[,] pixels = CurrentState.pixels;
-            for (int i = 0; i < pixels.GetLength(0); i++)
-                for (int j = 0; j < pixels.GetLength(1); j++)
-                {
-                    pixels[i, j].AddBrightness(brightness);
-                }
-        }
 
-        public static void AddRedBrightness(byte brightness)
-        {
-            PixelColor[,] pixels = CurrentState.pixels;
-            for (int i = 0; i < pixels.GetLength(0); i++)
-                for (int j = 0; j < pixels.GetLength(1); j++)
-                {
-                    pixels[i, j].AddBrightness(brightness);
-                }
-        }
-
-        public static void IntensifyRed(byte amount)
-        {
-            PixelColor[,] pixels = CurrentState.pixels;
-            for (int i = 0; i < pixels.GetLength(0); i++)
-                for (int j = 0; j < pixels.GetLength(1); j++)
-                {
-                    pixels[i, j].IntensifyRed1(amount);
-                }
-        }
 
         public static void ReverseColor()
         {
@@ -190,29 +165,20 @@ namespace ImageManipulation.CoreNS
             for (int i = 0; i < pixels.GetLength(0); i++)
                 for (int j = 0; j < pixels.GetLength(1); j++)
                 {
-                    pixels[i, j].Square();
+                    CurrentState.pixels[i, j].Square();
                 }
         }
 
         public static void SquareRoot()
         {
-            PixelColor[,] pixels = CurrentState.pixels;
-            for (int i = 0; i < pixels.GetLength(0); i++)
-                for (int j = 0; j < pixels.GetLength(1); j++)
+        
+            for (int i = 0; i < CurrentState.pixels.GetLength(0); i++)
+                for (int j = 0; j < CurrentState.pixels.GetLength(1); j++)
                 {
-                    pixels[i, j].SquareRoot();
+                    CurrentState.pixels[i, j].SquareRoot();
                 }
         }
 
-        public static void Logaritma()
-        {
-            PixelColor[,] pixels = CurrentState.pixels;
-            for (int i = 0; i < pixels.GetLength(0); i++)
-                for (int j = 0; j < pixels.GetLength(1); j++)
-                {
-                    pixels[i, j].Logaritma();
-                }
-        }
 
 
         public static void RemoveWeakColors()
@@ -221,19 +187,10 @@ namespace ImageManipulation.CoreNS
             for (int i = 0; i < pixels.GetLength(0); i++)
                 for (int j = 0; j < pixels.GetLength(1); j++)
                 {
-                    pixels[i, j].RemoveWeakColors();
+                    CurrentState.pixels[i, j].RemoveWeakColors();
                 }
         }
 
-        public static void IntensifyStrongestColor(byte amount)
-        {
-            PixelColor[,] pixels = CurrentState.pixels;
-            for (int i = 0; i < pixels.GetLength(0); i++)
-                for (int j = 0; j < pixels.GetLength(1); j++)
-                {
-                    pixels[i, j].IntensifyStrongestColor(amount);
-                }
-        }
 
     }
 }

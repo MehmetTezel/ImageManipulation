@@ -58,114 +58,7 @@ namespace ImageManipulation.CoreNS
 
         }
 
-        //public void ChangeColorsSMW(PixelParameter pixelParameter)
-        //{
-
-        //    double temp;
-        //    if (pixelParameter.IsPercentage)
-        //    {
-        //        if (pixelParameter.IsBlueEnabled)
-        //        {
-        //            temp = NewMethod(pixelParameter);
-        //        }
-        //        if (pixelParameter.IsGreenEnabled)
-        //        {
-        //            if (Green > Blue && Green > Red) // if strong
-        //            {
-        //                temp = Green * pixelParameter.Blue / 255;
-        //                if (temp > 255)
-        //                    Green = 255;
-        //                else
-        //                    Green = (byte)temp;
-        //            }
-        //            else if (Green < Blue && Green < Red) // if weak
-        //            {
-        //                temp = Green * pixelParameter.Red / 255;
-        //                if (temp > 255)
-        //                    Green = 255;
-        //                else
-        //                    Green= (byte)temp;
-        //            }
-        //            else  // if middle
-        //            {
-        //                temp = Green * pixelParameter.Green / 255;
-        //                if (temp > 255)
-        //                    Green = 255;
-        //                else
-        //                    Green = (byte)temp;
-        //            }
-        //        }
-        //        if (pixelParameter.IsRedEnabled)
-        //        {
-        //            if (Red > Green && Red > Blue) // if strong
-        //            {
-        //                temp = Red * pixelParameter.Blue / 255;
-        //                if (temp > 255)
-        //                    Red = 255;
-        //                else
-        //                    Red = (byte)temp;
-        //            }
-        //            else if (Red < Green && Red < Blue) // if weak
-        //            {
-        //                temp = Red * pixelParameter.Red / 255;
-        //                if (temp > 255)
-        //                    Red = 255;
-        //                else
-        //                    Red = (byte)temp;
-        //            }
-        //            else  // if middle
-        //            {
-        //                temp = Red * pixelParameter.Green / 255;
-        //                if (temp > 255)
-        //                    Red = 255;
-        //                else
-        //                    Red = (byte)temp;
-        //            }
-        //        }
-
-        //    }
-        //    else
-        //    {
-        //        if (pixelParameter.IsBlueEnabled)
-        //            Blue = (byte)(pixelParameter.Blue / 2);
-        //        if (pixelParameter.IsGreenEnabled)
-        //            Green = (byte)(pixelParameter.Green / 2);
-        //        if (pixelParameter.IsRedEnabled)
-        //            Red = (byte)(pixelParameter.Red / 2);
-        //    }
-
-        //}
-
-        private double NewMethod(PixelParameter pixelParameter)
-        {
-            double temp;
-            if (Blue > Green && Blue > Red) // if strong
-            {
-                temp = Blue * pixelParameter.Blue / 255;
-                if (temp > 255)
-                    Blue = 255;
-                else
-                    Blue = (byte)temp;
-            }
-            else if (Blue < Green && Blue < Red) // if weak
-            {
-                temp = Blue * pixelParameter.Red / 255;
-                if (temp > 255)
-                    Blue = 255;
-                else
-                    Blue = (byte)temp;
-            }
-            else  // if middle
-            {
-                temp = Blue * pixelParameter.Green / 255;
-                if (temp > 255)
-                    Blue = 255;
-                else
-                    Blue = (byte)temp;
-            }
-
-            return temp;
-        }
+        
 
         public void SwitchColors(PixelParameter pixelParameter)
         {
@@ -199,7 +92,7 @@ namespace ImageManipulation.CoreNS
 
         }
 
-
+        
 
         public void ToOneBit()
         {
@@ -372,87 +265,11 @@ namespace ImageManipulation.CoreNS
 
         }
 
-        public void Logaritma()
-        {
-            Blue = (byte)(Math.Log(Blue + 1));
-            Green = (byte)(Math.Log(Green + 1));
-            Red = (byte)(Math.Log(Red + 1));
-        }
-
-        public void InverseLogaritma()
-        {
-            Blue = (byte)(Math.Log(Blue + 1));
-            Green = (byte)(Math.Log(Green + 1));
-            Red = (byte)(Math.Log(Red + 1));
-        }
+     
 
 
-        public void AddBrightness(byte brightness)
-        {
-            if (Blue + brightness <= byte.MaxValue)
-            {
-                Blue += brightness;
-            }
+       
 
-            else
-            {
-                Blue = byte.MaxValue;
-
-            }
-
-            if (Green + brightness <= byte.MaxValue)
-            {
-                Green += brightness;
-            }
-
-            else
-            {
-                Green = byte.MaxValue;
-
-            }
-            if (Red + brightness <= byte.MaxValue)
-            {
-                Red += brightness;
-            }
-
-            else
-            {
-                Red = byte.MaxValue;
-
-            }
-
-        }
-
-        public void AddRedBrightness(byte brightness)
-        {
-            if (Red + brightness <= byte.MaxValue)
-            {
-                Red += brightness;
-            }
-
-            else
-            {
-                Red = byte.MaxValue;
-
-            }
-
-        }
-
-        public void IntensifyRed1(byte amount)
-        {
-            if (Red >= 125 & Green < 100 & Blue < 100)
-            {
-                if (Red + amount <= byte.MaxValue)
-
-                    Red += amount;
-                else
-                    Red = byte.MaxValue;
-
-                Blue /= 2;
-                Green /= 2;
-            }
-
-        }
 
         public void RemoveWeakColors()
         {
@@ -485,46 +302,6 @@ namespace ImageManipulation.CoreNS
                     Blue = 0;
                     Green = 0;
                     break;
-            }
-        }
-        public void IntensifyStrongestColor(byte amount)
-        {
-            Colors StrongestColor;
-
-            if (Blue > Green)
-                StrongestColor = Colors.Blue;
-            else
-                StrongestColor = Colors.Green;
-            if (StrongestColor == Colors.Blue)
-            {
-                if (Red > Blue)
-                    StrongestColor = Colors.Red;
-            }
-            else
-                if (Red > Green)
-                StrongestColor = Colors.Red;
-
-            switch (StrongestColor)
-            {
-                case Colors.Blue:
-                    if (amount + Blue < byte.MaxValue)
-                        Blue += amount;
-                    else
-                        Blue = byte.MaxValue;
-                    break;
-                case Colors.Green:
-                    if (amount + Green < byte.MaxValue)
-                        Green += amount;
-                    else
-                        Green = byte.MaxValue;
-                    break;
-                case Colors.Red:
-                    if (amount + Red < byte.MaxValue)
-                        Red += amount;
-                    else
-                        Red = byte.MaxValue;
-                    break;
-
             }
         }
 

@@ -82,32 +82,57 @@ namespace ImageManipulation.CoreNS
 
         public static void DeltaX()
         {
-            for(int i=0;i<CurrentState.pixels.GetLength(0);i++)
+            
+            long width = CurrentState.pixels.GetLongLength(0); ///width
+            long height = CurrentState.pixels.GetLongLength(1);  //height
+            for (int i = 0; i < width-1; i++)
             {
-                for(int j=0;j<CurrentState.pixels.GetLength(1)-1; j++)
+                for (int j = 0; j < height-1; j++)
                 {
-                    int delta = CurrentState.pixels[i, j].Blue - CurrentState.pixels[i, j + 1].Blue;
+                    int delta = CurrentState.pixels[i, j].Blue - CurrentState.pixels[i+1, j].Blue;
                     if (delta < 0)
                         delta = -delta;
-                    if(delta > 0)
-                    {
-                        int a = i;
-                    }
-                    CurrentState.pixels[i, j].Blue = (byte)delta;
+
+                    CurrentState.pixels[i, j].Blue = (byte) delta;
 
 
-                    delta = CurrentState.pixels[i, j].Green - CurrentState.pixels[i, j + 1].Green;
+                    delta = CurrentState.pixels[i, j].Green - CurrentState.pixels[i+1, j] .Green;
                     if (delta < 0)
                         delta = -delta;
                     CurrentState.pixels[i, j].Green = (byte)delta;
 
-                    delta = CurrentState.pixels[i, j].Red - CurrentState.pixels[i, j + 1].Red;
+                    delta = CurrentState.pixels[i, j].Red - CurrentState.pixels[i+1, j ].Red;
                     if (delta < 0)
                         delta = -delta;
                     CurrentState.pixels[i, j].Red = (byte)delta;
+                    
 
                 }
             }
+
+            //for(int i=0;i<CurrentState.pixels.GetLength(0);i++)
+            //{
+            //    for(int j=0;j<CurrentState.pixels.GetLength(1)-1; j++)
+            //    {
+            //        int delta = CurrentState.pixels[i, j].Blue - CurrentState.pixels[i, j + 1].Blue;
+            //        if (delta < 0)
+            //            delta = -delta;
+
+            //        CurrentState.pixels[i, j].Blue = (byte)delta;
+
+
+            //        delta = CurrentState.pixels[i, j].Green - CurrentState.pixels[i, j + 1].Green;
+            //        if (delta < 0)
+            //            delta = -delta;
+            //        CurrentState.pixels[i, j].Green = (byte)delta;
+
+            //        delta = CurrentState.pixels[i, j].Red - CurrentState.pixels[i, j + 1].Red;
+            //        if (delta < 0)
+            //            delta = -delta;
+            //        CurrentState.pixels[i, j].Red = (byte)delta;
+
+            //    }
+            //}
         }
 
         public static void DeltaY()

@@ -87,10 +87,6 @@ namespace ImageManipulation.TabsNS.ImageOperationsNS
             method.Description = "";
             methodList.Add(method);
 
-            method = new Method();
-            method.Name = "ToGray2";
-            method.Description = "";
-            methodList.Add(method);
 
             method = new Method();
             method.Name = "ReverseColor";
@@ -113,10 +109,6 @@ namespace ImageManipulation.TabsNS.ImageOperationsNS
             methodList.Add(method);
 
 
-            method = new Method();
-            method.Name = "Logaritma";
-            method.Description = "";
-            methodList.Add(method);
 
 
 

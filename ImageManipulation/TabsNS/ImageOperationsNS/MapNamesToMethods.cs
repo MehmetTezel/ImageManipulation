@@ -24,13 +24,6 @@ namespace ImageManipulation.TabsNS.ImageOperationsNS
                 return;
             }
 
-            if (methodName == "ToGray2")
-            {
-                MyImageTools.ToGray2();
-                CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
-
-                return;
-            }
 
             if (methodName == "ReverseColor")
             {
@@ -63,13 +56,6 @@ namespace ImageManipulation.TabsNS.ImageOperationsNS
                 return;
             }
 
-            if (methodName == "Logaritma")
-            {
-                MyImageTools.Logaritma();
-                CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
-
-                return;
-            }
 
             if (methodName == "Edge Detection 1")
             {
