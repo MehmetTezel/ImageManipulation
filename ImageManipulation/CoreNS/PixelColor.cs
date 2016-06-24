@@ -24,7 +24,7 @@ namespace ImageManipulation.CoreNS
         public byte Green;
         public byte Red;
         public byte Alpha;
-
+       
 
 
 
@@ -351,9 +351,9 @@ namespace ImageManipulation.CoreNS
         }
         public void ReverseColor()
         {
-            Blue = (byte)(byte.MaxValue - 1 - Blue);
-            Green = (byte)(byte.MaxValue - 1 - Green);
-            Red = (byte)(byte.MaxValue - 1 - Red);
+            Blue = (byte)(byte.MaxValue - Blue);
+            Green = (byte)(byte.MaxValue  - Green);
+            Red = (byte)(byte.MaxValue  - Red);
         }
 
         public void Square()

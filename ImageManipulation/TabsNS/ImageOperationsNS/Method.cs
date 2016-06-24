@@ -118,6 +118,34 @@ namespace ImageManipulation.TabsNS.ImageOperationsNS
             method.Description = "";
             methodList.Add(method);
 
+
+
+            method = new Method();
+            method.Name = "Edge Detection 1";
+            method.Description = "";
+            methodList.Add(method);
+
+            method = new Method();
+            method.Name = "Edge Detection 2";
+            method.Description = "";
+            methodList.Add(method);
+
+            method = new Method();
+            method.Name = "Edge Detection 3";
+            method.Description = "";
+            methodList.Add(method);
+
+            method = new Method();
+            method.Name = "DeltaX";
+            method.Description = "";
+            methodList.Add(method);
+
+
+            method = new Method();
+            method.Name = "DeltaY";
+            method.Description = "";
+            methodList.Add(method);
+
             return methodList;
         }
 

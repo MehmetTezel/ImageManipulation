@@ -71,6 +71,50 @@ namespace ImageManipulation.TabsNS.ImageOperationsNS
                 return;
             }
 
+            if (methodName == "Edge Detection 1")
+            {
+                KernelMatrix.EdgeDetection1();
+
+                CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
+
+                return;
+            }
+
+            if (methodName == "Edge Detection 2")
+            {
+                KernelMatrix.EdgeDetection2();
+
+                CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
+
+                return;
+            }
+
+            if (methodName == "Edge Detection 3")
+            {
+                KernelMatrix.EdgeDetection3();
+
+                CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
+
+                return;
+            }
+
+            if (methodName == "DeltaX")
+            {
+                KernelMatrix.DeltaX();
+
+                CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
+
+                return;
+            }
+
+            if (methodName == "DeltaY")
+            {
+                KernelMatrix.DeltaY();
+
+                CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
+
+                return;
+            }
 
         }
     }

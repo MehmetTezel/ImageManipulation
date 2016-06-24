@@ -9,6 +9,9 @@ namespace ImageManipulation.CoreNS
 {
     public static class MyImageTools
     {
+
+
+
         public static unsafe void ConstructPixelBufferFromFile()
         {
             BitmapSource source = CurrentState.bitmapImage as BitmapSource;
@@ -53,7 +56,7 @@ namespace ImageManipulation.CoreNS
         public static void SaveImage(string filePath)
         {
             var encoder = new PngBitmapEncoder();
-           
+
             encoder.Frames.Add(BitmapFrame.Create((BitmapSource)CurrentState.image.Source));
             using (FileStream stream = new FileStream(filePath, FileMode.Create))
                 encoder.Save(stream);
@@ -63,7 +66,7 @@ namespace ImageManipulation.CoreNS
         public static void ChangePixelColor(PixelParameter pixelParam)
         {
             PixelColor[,] pixels = new PixelColor[CurrentState.originalPixels.GetLength(0), CurrentState.originalPixels.GetLength(1)];
-            Array.Copy(CurrentState.originalPixels,pixels, pixels.Length);
+            Array.Copy(CurrentState.originalPixels, pixels, pixels.Length);
             for (int i = 0; i < pixels.GetLength(0); i++)
                 for (int j = 0; j < pixels.GetLength(1); j++)
                 {
@@ -72,7 +75,7 @@ namespace ImageManipulation.CoreNS
                 }
             CurrentState.pixels = pixels;
             CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
-            
+
         }
 
 
@@ -161,7 +164,7 @@ namespace ImageManipulation.CoreNS
                 }
         }
 
-        public static void IntensifyRed( byte amount)
+        public static void IntensifyRed(byte amount)
         {
             PixelColor[,] pixels = CurrentState.pixels;
             for (int i = 0; i < pixels.GetLength(0); i++)
@@ -222,7 +225,7 @@ namespace ImageManipulation.CoreNS
                 }
         }
 
-        public static void IntensifyStrongestColor( byte amount)
+        public static void IntensifyStrongestColor(byte amount)
         {
             PixelColor[,] pixels = CurrentState.pixels;
             for (int i = 0; i < pixels.GetLength(0); i++)
