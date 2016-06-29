@@ -138,6 +138,44 @@ namespace ImageManipulation.TabsNS.ImageOperationsNS
             method.Description = "";
             methodList.Add(method);
 
+            method = new Method();
+            method.Name = "Sharpen";
+            method.Description = "";
+            methodList.Add(method);
+
+            method = new Method();
+            method.Name = "Sharpen 2";
+            method.Description = "";
+            methodList.Add(method);
+
+            method = new Method();
+            method.Name = "BoxBlur";
+            method.Description = "";
+            methodList.Add(method);
+
+            method = new Method();
+            method.Name = "GaussianBlur";
+            method.Description = "";
+            methodList.Add(method);
+
+            method = new Method();
+            method.Name = "Edge Detection 4";
+            method.Description = "";
+            methodList.Add(method);
+
+            
+            method = new Method();
+            method.Name = "Histogram Equalize";
+            method.Description = "";
+            methodList.Add(method);
+            
+
+            method = new Method();
+            method.Name = "Sobel Edge Detection";
+            method.Description = "";
+            methodList.Add(method);
+
+
             return methodList;
         }
 

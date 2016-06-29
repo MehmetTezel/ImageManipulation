@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using ImageManipulation.CoreNS;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace ImageManipulation.TabsNS.ImageOperationsNS
 {
@@ -170,7 +171,11 @@ namespace ImageManipulation.TabsNS.ImageOperationsNS
             if (CurrentState.image == null)
                 return;
             Method selectedMethod = (Method)ListBoxWithMethods.SelectedItem;
+            Cursor originalCursor = this.Cursor;
+            this.Cursor = Cursors.Wait;
             MapNamesToMethods.MapName(selectedMethod);
+            this.Cursor = originalCursor;
+           
         }
 
     }

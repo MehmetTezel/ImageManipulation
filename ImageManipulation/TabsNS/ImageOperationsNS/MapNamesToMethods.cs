@@ -102,6 +102,73 @@ namespace ImageManipulation.TabsNS.ImageOperationsNS
                 return;
             }
 
+
+            if (methodName == "Sharpen")
+            {
+                KernelMatrix.Sharpen();
+
+                CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
+
+                return;
+            }
+            if (methodName == "Sharpen 2")
+            {
+                KernelMatrix.Sharpen2();
+
+                CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
+
+                return;
+            }
+
+            
+            if (methodName == "BoxBlur")
+            {
+                KernelMatrix.BoxBlur();
+
+                CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
+
+                return;
+            }
+
+            if (methodName == "GaussianBlur")
+            {
+                KernelMatrix.GaussianBlur();
+
+                CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
+
+                return;
+            }
+            
+            if (methodName == "Edge Detection 4")
+            {
+                KernelMatrix.EdgeDetaction4();
+
+                CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
+
+                return;
+            }
+
+            
+
+            if (methodName == "Sobel Edge Detection")
+            {
+                KernelMatrix.SobelEdgeDetection();
+
+                CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
+
+                return;
+            }
+
+            if (methodName == "Histogram Equalize")
+            {
+                Histogram histogram = new Histogram();
+                histogram.Equalise();
+
+                CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
+
+                return;
+            }
+
         }
     }
 }

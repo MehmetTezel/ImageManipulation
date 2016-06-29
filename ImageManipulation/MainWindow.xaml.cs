@@ -29,7 +29,11 @@ namespace ImageManipulation
         {
             InitializeComponent();
             buttonSaveImage.IsEnabled = false;
+            buttonNextImage.IsEnabled = false;
+            buttonPreviousImage.IsEnabled = false;
+            MaximiseToggleButton.IsEnabled = false;
         }
+
 
         private void buttonLoadImage_Click(object sender, RoutedEventArgs e)
         {
@@ -48,8 +52,16 @@ namespace ImageManipulation
             CurrentState.mainWindow = this;
 
             myImage = new Image();
-            
-            MyImageTools.SetCurrentState(fileName, myImage);
+            try
+            {
+                MyImageTools.SetCurrentState(fileName, myImage);
+            }
+            catch ( Exception e)
+            {
+                
+                MessageBox.Show("File type not supported !","Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                return;
+            }
             MyImageTools.ConstructPixelBufferFromFile();
 
             zoomBorder.Child = myImage;
@@ -65,9 +77,13 @@ namespace ImageManipulation
             
             tabConrtol1.Items.Add(propertiesTabItem);
             buttonSaveImage.IsEnabled = true;
+            buttonNextImage.IsEnabled = true;
+            buttonPreviousImage.IsEnabled = true;
+            MaximiseToggleButton.IsEnabled = true;
+
         }
 
-       
+
 
 
         private void buttonSaveImage_Click(object sender, RoutedEventArgs e)

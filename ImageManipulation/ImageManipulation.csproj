@@ -81,6 +81,7 @@
     <Compile Include="CoreNS\Controls\Slider.cs" />
     <Compile Include="CoreNS\Controls\ZoomBorder.cs" />
     <Compile Include="CoreNS\CurrentState.cs" />
+    <Compile Include="CoreNS\Histogram.cs" />
     <Compile Include="CoreNS\Ker.nellMatrix.cs" />
     <Compile Include="TabsNS\ImageOperationsNS\MapNamesToMethods.cs" />
     <Compile Include="CoreNS\MyImageTools.cs" />
