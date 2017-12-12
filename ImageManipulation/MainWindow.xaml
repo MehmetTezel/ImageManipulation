@@ -8,8 +8,10 @@
         xmlns:local2="clr-namespace:ImageManipulation.TabsNS.ImagePropertyNS"
         xmlns:local3="clr-namespace:ImageManipulation.CoreNS.Controls"
         mc:Ignorable="d" 
-        Title="MainWindow" Height="350" Width="525" SizeToContent="WidthAndHeight" >
-
+        WindowState="Maximized"
+        
+         >
+    <!--Title="MainWindow" Height="350" Width="525" SizeToContent="WidthAndHeight"-->
     <DockPanel x:Name="myDockPanel" Background="{DynamicResource UserConrolBackground}">
         
         <StackPanel x:Name="MenuStackPanel" DockPanel.Dock="Top"  Orientation="Horizontal" Height="30"  >
@@ -86,7 +88,7 @@
             <GridSplitter  Grid.Column="1"  HorizontalAlignment="Stretch" BorderBrush="Black" Background="#FFF1F0E8"   />
             <TabControl Name="tabConrtol1"  Grid.Column="2"  Background="{x:Null}" Margin="5,5,0,0" >
                 <TabItem  Header="Manipulations" >
-                    <local1:AddMethodsUC/>
+                    <local1:AddMethodsUC VerticalAlignment="Center"/>
                 </TabItem>
             </TabControl>
 

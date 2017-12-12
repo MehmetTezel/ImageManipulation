@@ -13,9 +13,6 @@ namespace ImageManipulation.TabsNS.ImageOperationsNS
     {
 
         private ObservableCollection<Method> methods;
-
-        
-
         public AddMethodsUC()
         {
             InitializeComponent();
@@ -106,41 +103,12 @@ namespace ImageManipulation.TabsNS.ImageOperationsNS
                 return;
             MyImageTools.ChangePixelColor(GetPixelColorsFromSliders());
         }
-        private void checkBoxBlueSlider_Checked(object sender, RoutedEventArgs e)
-        {
-            blueSlider.IsEnabled = false;
-        }
 
-        private void checkBoxGreenSlider_Checked(object sender, RoutedEventArgs e)
-        {
-            greenSlider.IsEnabled = false;
-        }
-
-        private void checkBoxRedSlider_Checked(object sender, RoutedEventArgs e)
-        {
-            redSlider.IsEnabled = false;
-        }
-
-        private void checkBoxBlueSlider_Unchecked(object sender, RoutedEventArgs e)
-        {
-            blueSlider.IsEnabled = true;
-        }
-
-        private void checkBoxGreenSlider_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-            greenSlider.IsEnabled = true;
-        }
-
-        private void checkBoxRedSlider_Unchecked(object sender, RoutedEventArgs e)
-        {
-            redSlider.IsEnabled = true;
-        }
 
         private void resetOriginalPicture_Click(object sender, RoutedEventArgs e)
         {
             SetSlidersToDefaultValues();
-            ChangePixels();
+            MyImageTools.ResetOriginalPicture();
         }
 
         private void SetSlidersToDefaultValues()
@@ -175,6 +143,7 @@ namespace ImageManipulation.TabsNS.ImageOperationsNS
             this.Cursor = Cursors.Wait;
             MapNamesToMethods.MapName(selectedMethod);
             this.Cursor = originalCursor;
+            
            
         }
 

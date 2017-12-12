@@ -15,7 +15,7 @@ namespace ImageManipulation.CoreNS
         public static unsafe void ConstructPixelBufferFromFile()
         {
             BitmapSource source = CurrentState.bitmapImage as BitmapSource;
-            PixelColor[,] pixels = CurrentState.originalPixels;
+            PixelColor[,] pixels = CurrentState.pixelsBeforeColorEnhancing;
 
             fixed (PixelColor* buffer = &pixels[0, 0])
               source.CopyPixels(
@@ -23,15 +23,16 @@ namespace ImageManipulation.CoreNS
                 (IntPtr)(buffer),
                 pixels.GetLength(0) * pixels.GetLength(1) * sizeof(PixelColor),
                 source.PixelWidth * sizeof(PixelColor));
-            CurrentState.pixels = new PixelColor[CurrentState.originalPixels.GetLength(0), CurrentState.originalPixels.GetLength(1)];
-            Array.Copy(CurrentState.originalPixels, CurrentState.pixels, pixels.Length);
+            CurrentState.currentPixels = new PixelColor[CurrentState.pixelsBeforeColorEnhancing.GetLength(0), CurrentState.pixelsBeforeColorEnhancing.GetLength(1)];
+            Array.Copy(CurrentState.pixelsBeforeColorEnhancing, CurrentState.currentPixels, pixels.Length);
+            CurrentState.originalPixels = CurrentState.currentPixels;
         }
 
         public static unsafe void SetCurrentState(string fileName, Image image)
         {
             Uri uri = new Uri(fileName, UriKind.RelativeOrAbsolute);
             BitmapImage bitmapImage = new BitmapImage(uri);
-            CurrentState.originalPixels = new PixelColor[bitmapImage.PixelHeight, bitmapImage.PixelWidth];
+            CurrentState.pixelsBeforeColorEnhancing = new PixelColor[bitmapImage.PixelHeight, bitmapImage.PixelWidth];
             CurrentState.fullfileName = fileName;
             CurrentState.bitmapImage = bitmapImage;
             CurrentState.image = image;
@@ -40,7 +41,7 @@ namespace ImageManipulation.CoreNS
         public static unsafe WriteableBitmap WritePixelsToBitmap()
         {
             BitmapSource source = CurrentState.bitmapImage as BitmapSource;
-            PixelColor[,] pixels = CurrentState.pixels;
+            PixelColor[,] pixels = CurrentState.currentPixels;
 
             WriteableBitmap writableBitmap = new WriteableBitmap(source);
             int rows = pixels.GetLength(0);
@@ -68,24 +69,29 @@ namespace ImageManipulation.CoreNS
 
         public static void ChangePixelColor(PixelParameter pixelParam)
         {
-            PixelColor[,] pixels = new PixelColor[CurrentState.originalPixels.GetLength(0), CurrentState.originalPixels.GetLength(1)];
-            Array.Copy(CurrentState.originalPixels, pixels, pixels.Length);
+            PixelColor[,] pixels = new PixelColor[CurrentState.pixelsBeforeColorEnhancing.GetLength(0), CurrentState.pixelsBeforeColorEnhancing.GetLength(1)];
+            Array.Copy(CurrentState.pixelsBeforeColorEnhancing, pixels, pixels.Length);
             for (int i = 0; i < pixels.GetLength(0); i++)
                 for (int j = 0; j < pixels.GetLength(1); j++)
                 {
                     pixels[i, j].ChangeColors(pixelParam);
                     pixels[i, j].SwitchColors(pixelParam);
                 }
-            CurrentState.pixels = pixels;
+            CurrentState.currentPixels = pixels;
             CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
 
         }
 
+        public  static void ResetOriginalPicture()
+        {
+            CurrentState.currentPixels = CurrentState.originalPixels;
+            CurrentState.image.Source = MyImageTools.WritePixelsToBitmap();
 
+        }
 
         public static void ToOneBit()
         {
-            PixelColor[,] pixels = CurrentState.pixels;
+            PixelColor[,] pixels = CurrentState.currentPixels;
 
             for (int i = 0; i < pixels.GetLength(0); i++)
                 for (int j = 0; j < pixels.GetLength(1); j++)
@@ -96,7 +102,7 @@ namespace ImageManipulation.CoreNS
 
         public static void ToGray()
         {
-            PixelColor[,] pixels = CurrentState.pixels;
+            PixelColor[,] pixels = CurrentState.currentPixels;
 
             for (int i = 0; i < pixels.GetLength(0); i++)
                 for (int j = 0; j < pixels.GetLength(1); j++)
@@ -107,7 +113,7 @@ namespace ImageManipulation.CoreNS
         }
         public static void ToGray2()
         {
-            PixelColor[,] pixels = CurrentState.pixels;
+            PixelColor[,] pixels = CurrentState.currentPixels;
 
             for (int i = 0; i < pixels.GetLength(0); i++)
                 for (int j = 0; j < pixels.GetLength(1); j++)
@@ -118,7 +124,7 @@ namespace ImageManipulation.CoreNS
 
         public static void ToGray3()
         {
-            PixelColor[,] pixels = CurrentState.pixels;
+            PixelColor[,] pixels = CurrentState.currentPixels;
 
             for (int i = 0; i < pixels.GetLength(0); i++)
                 for (int j = 0; j < pixels.GetLength(1); j++)
@@ -128,7 +134,7 @@ namespace ImageManipulation.CoreNS
         }
         public static void ToGray4()
         {
-            PixelColor[,] pixels = CurrentState.pixels;
+            PixelColor[,] pixels = CurrentState.currentPixels;
 
             for (int i = 0; i < pixels.GetLength(0); i++)
                 for (int j = 0; j < pixels.GetLength(1); j++)
@@ -138,7 +144,7 @@ namespace ImageManipulation.CoreNS
         }
         public static void IntensifyHighBitsReduceLowBits(byte amount)
         {
-            PixelColor[,] pixels = CurrentState.pixels;
+            PixelColor[,] pixels = CurrentState.currentPixels;
 
             for (int i = 0; i < pixels.GetLength(0); i++)
                 for (int j = 0; j < pixels.GetLength(1); j++)
@@ -151,7 +157,7 @@ namespace ImageManipulation.CoreNS
 
         public static void ReverseColor()
         {
-            PixelColor[,] pixels = CurrentState.pixels;
+            PixelColor[,] pixels = CurrentState.currentPixels;
             for (int i = 0; i < pixels.GetLength(0); i++)
                 for (int j = 0; j < pixels.GetLength(1); j++)
                 {
@@ -161,21 +167,21 @@ namespace ImageManipulation.CoreNS
 
         public static void Square()
         {
-            PixelColor[,] pixels = CurrentState.pixels;
+            PixelColor[,] pixels = CurrentState.currentPixels;
             for (int i = 0; i < pixels.GetLength(0); i++)
                 for (int j = 0; j < pixels.GetLength(1); j++)
                 {
-                    CurrentState.pixels[i, j].Square();
+                    CurrentState.currentPixels[i, j].Square();
                 }
         }
 
         public static void SquareRoot()
         {
         
-            for (int i = 0; i < CurrentState.pixels.GetLength(0); i++)
-                for (int j = 0; j < CurrentState.pixels.GetLength(1); j++)
+            for (int i = 0; i < CurrentState.currentPixels.GetLength(0); i++)
+                for (int j = 0; j < CurrentState.currentPixels.GetLength(1); j++)
                 {
-                    CurrentState.pixels[i, j].SquareRoot();
+                    CurrentState.currentPixels[i, j].SquareRoot();
                 }
         }
 
@@ -183,11 +189,11 @@ namespace ImageManipulation.CoreNS
 
         public static void RemoveWeakColors()
         {
-            PixelColor[,] pixels = CurrentState.pixels;
+            PixelColor[,] pixels = CurrentState.currentPixels;
             for (int i = 0; i < pixels.GetLength(0); i++)
                 for (int j = 0; j < pixels.GetLength(1); j++)
                 {
-                    CurrentState.pixels[i, j].RemoveWeakColors();
+                    CurrentState.currentPixels[i, j].RemoveWeakColors();
                 }
         }
 

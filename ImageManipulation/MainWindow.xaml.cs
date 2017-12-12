@@ -23,7 +23,7 @@ namespace ImageManipulation
         List<string> fileList;
         DockPanel maximiseStackPanel;
         TabItem propertiesTabItem = null;
-
+        
         Image myImage;
         public MainWindow()
         {
@@ -32,6 +32,12 @@ namespace ImageManipulation
             buttonNextImage.IsEnabled = false;
             buttonPreviousImage.IsEnabled = false;
             MaximiseToggleButton.IsEnabled = false;
+            string[] args = Environment.GetCommandLineArgs();
+            if (args.Length > 1 )
+            {
+                OpenImage(args[1]);
+              
+            }
         }
 
 
