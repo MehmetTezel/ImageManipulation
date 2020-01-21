@@ -65,7 +65,7 @@ namespace ImageManipulation
             catch ( Exception e)
             {
                 
-                MessageBox.Show("File type not supported !","Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("File type not supported !" + e.Message,"Error",MessageBoxButton.OK,MessageBoxImage.Error);
                 return;
             }
             MyImageTools.ConstructPixelBufferFromFile();

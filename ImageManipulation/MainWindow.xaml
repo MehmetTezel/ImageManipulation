@@ -86,7 +86,7 @@
 
             <!--</DockPanel>-->
             <GridSplitter  Grid.Column="1"  HorizontalAlignment="Stretch" BorderBrush="Black" Background="#FFF1F0E8"   />
-            <TabControl Name="tabConrtol1"  Grid.Column="2"  Background="{x:Null}" Margin="5,5,0,0" >
+            <TabControl Name="tabConrtol1"  Grid.Column="2"  Background="{x:Null}"  >
                 <TabItem  Header="Manipulations" >
                     <local1:AddMethodsUC VerticalAlignment="Center"/>
                 </TabItem>
